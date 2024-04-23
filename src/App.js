@@ -1,24 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+
+import Layout from './Layout';
+import { HomeScreen } from './home/HomeScreen';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";   
+import { QuoteScreen } from './components/quoteScreen';
+import Restaurant from './restaurants/Restaurant';
+import Food from './Food';
+import Contact from './Contact';
+
 
 function App() {
+
+  const allPaths = createBrowserRouter([
+    
+    {
+      path: '/',
+      element: <Layout/>,
+      children:  [
+        {
+          path: '/',
+          element: <HomeScreen/>
+        },
+        {
+          path: 'quotes',
+          element: <QuoteScreen/>
+        },
+        {
+          path: 'restaurant',
+          element: <Restaurant />
+        },
+        {
+          path: 'food',
+          element: <Food />
+        },
+        {
+          path: 'contact',
+          element: <Contact />
+        }
+      ]
+    }
+  ])
+    
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {/* <BrowserRouter>
+      <Routes>
+      <Route path='/' element = { <HomeScreen/> } />
+      <Route path='/quotes' element = {<QuotePage/>} />
+      </Routes>
+      </BrowserRouter> */}
+
+      <RouterProvider router={allPaths} />
+    </>
+
   );
 }
 
